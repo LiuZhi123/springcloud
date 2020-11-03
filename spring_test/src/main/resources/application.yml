@@ -1,0 +1,70 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /lz
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&connectTimeout=10000&socketTimeout=300000&serverTimezone=Asia/Shanghai
+    username: root
+    password: 980426
+    initialization-mode: always
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 20
+    minIdle: 5
+    maxActive: 60
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 300000
+    minEvictableIdleTimeMillis: 600000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  session:
+    store-type: none
+  mail:
+    host: smtp.qq.com
+    protocol: smtp
+    username: 1148918519@qq.com
+    password: xrwgxwjtnftficdc
+  application:
+    name: consumer
+
+
+#nacos:
+#  config:
+#    server-addr: 127.0.0.1:8848
+#  discovery:
+#    server-addr: 127.0.0.1:8848
+#
+#rocketmq:
+#  name-server: 127.0.0.1:9876
+#  producer:
+#    group: my-group
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+#
+#xxl:
+#  job:
+#    admin:
+#      address: http://127.0.0.1:8080/xxl-job-admin
+#    executor:
+#      appname: xxl-job-executor-sample
+#      address:
+#      ip:
+#      port: 9999
+#      logpath: H:\liuzhi\tools\code
+#      logretentiondays: -1
+#    accessToken:
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/

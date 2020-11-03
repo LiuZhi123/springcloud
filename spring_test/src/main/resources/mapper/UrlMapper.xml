@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.UrlMapper">
+  <resultMap id="BaseResultMap" type="com.demo.entity.Url">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="short_url" jdbcType="VARCHAR" property="short_url" />
+    <result column="long_url" jdbcType="VARCHAR" property="long_url" />
+  </resultMap>
+  <insert id="insert" parameterType="com.demo.entity.Url">
+    insert into url (id, short_url, long_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{short_url,jdbcType=VARCHAR}, #{long_url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, short_url, long_url
+    from url
+  </select>
+  <select id="getByShort" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id, short_url, long_url from url where short_url = #{shortUrl,jdbcType=VARCHAR}
+  </select>
+</mapper>

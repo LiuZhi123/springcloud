@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: consumer
+          uri: http://localhost:9000
+          predicates:
+            - Path= /lz/**
+server:
+  port: 9999
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+

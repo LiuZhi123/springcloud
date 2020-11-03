@@ -1,0 +1,13 @@
+*.cmd
+euruka/mvnw
+gateway/.mvn/wrapper/maven-wrapper.jar
+euruka/.mvn/wrapper/maven-wrapper.jar
+spring_test/.idea/
+spring_test/target/
+gateway/.mvn/
+euruka/.mvn/
+*.iml
+gateway/mvnw
+*.md
+euruka/.gitignore
+gateway/.gitignore

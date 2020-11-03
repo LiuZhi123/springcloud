@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.MBankMapper">
+  <resultMap id="BaseResultMap" type="com.demo.entity.MBank">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="bank_code" jdbcType="VARCHAR" property="bank_code" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bank_name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="del" jdbcType="BIT" property="del" />
+    <result column="app_display" jdbcType="BIT" property="app_display" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="create_user_id" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="update_user_id" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from m_bank
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.demo.entity.MBank">
+    insert into m_bank (id, create_time, update_time, 
+      bank_code, bank_name, remark, 
+      del, app_display, create_user_id, 
+      update_user_id)
+    values (#{id,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, 
+      #{bank_code,jdbcType=VARCHAR}, #{bank_name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{del,jdbcType=BIT}, #{app_display,jdbcType=BIT}, #{create_user_id,jdbcType=VARCHAR}, 
+      #{update_user_id,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.demo.entity.MBank">
+    update m_bank
+    set create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      bank_code = #{bank_code,jdbcType=VARCHAR},
+      bank_name = #{bank_name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      del = #{del,jdbcType=BIT},
+      app_display = #{app_display,jdbcType=BIT},
+      create_user_id = #{create_user_id,jdbcType=VARCHAR},
+      update_user_id = #{update_user_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, create_time, update_time, bank_code, bank_name, remark, del, app_display, 
+    create_user_id, update_user_id
+    from m_bank
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, create_time, update_time, bank_code, bank_name, remark, del, app_display, 
+    create_user_id, update_user_id
+    from m_bank
+  </select>
+  <resultMap id="BaseResultMap" type="com.demo.entity.MBank">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="bank_code" jdbcType="VARCHAR" property="bank_code" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bank_name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="del" jdbcType="BIT" property="del" />
+    <result column="app_display" jdbcType="BIT" property="app_display" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="create_user_id" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="update_user_id" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from m_bank
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.demo.entity.MBank">
+    insert into m_bank (id, create_time, update_time, 
+      bank_code, bank_name, remark, 
+      del, app_display, create_user_id, 
+      update_user_id)
+    values (#{id,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, 
+      #{bank_code,jdbcType=VARCHAR}, #{bank_name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{del,jdbcType=BIT}, #{app_display,jdbcType=BIT}, #{create_user_id,jdbcType=VARCHAR}, 
+      #{update_user_id,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.demo.entity.MBank">
+    update m_bank
+    set create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      bank_code = #{bank_code,jdbcType=VARCHAR},
+      bank_name = #{bank_name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      del = #{del,jdbcType=BIT},
+      app_display = #{app_display,jdbcType=BIT},
+      create_user_id = #{create_user_id,jdbcType=VARCHAR},
+      update_user_id = #{update_user_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, create_time, update_time, bank_code, bank_name, remark, del, app_display, 
+    create_user_id, update_user_id
+    from m_bank
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, create_time, update_time, bank_code, bank_name, remark, del, app_display, 
+    create_user_id, update_user_id
+    from m_bank
+  </select>
+</mapper>

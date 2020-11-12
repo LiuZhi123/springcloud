@@ -1,5 +1,6 @@
 package com.springboot.sso.config;
 
+import com.springboot.sso.util.myRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -39,6 +40,8 @@ public class shiroConfig {
         chains.put("/login","anon");
         chains.put("/home","anon");
         chains.put("/test","anon");
+        chains.put("/name","anon");
+        chains.put("/index","anon");
         chains.put("/**","authc");
         bean.setFilterChainDefinitionMap(chains);
         return bean;
@@ -70,6 +73,9 @@ public class shiroConfig {
         return simpleCookie;
     }
 
-//    @Bean
-//    public UserRealm
+    @Bean("myRealm")
+    public myRealm getRealm(){
+        myRealm realm = new myRealm();
+        return realm;
+    }
 }

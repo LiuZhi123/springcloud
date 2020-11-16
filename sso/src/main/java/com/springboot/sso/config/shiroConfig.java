@@ -1,14 +1,21 @@
 package com.springboot.sso.config;
 
+import com.springboot.sso.util.RetryCredentialsMatcher;
 import com.springboot.sso.util.myRealm;
+import com.sun.deploy.security.CredentialManager;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.DispatcherType;
@@ -40,8 +47,8 @@ public class shiroConfig {
         chains.put("/login","anon");
         chains.put("/home","anon");
         chains.put("/test","anon");
-        chains.put("/name","anon");
-        chains.put("/index","anon");
+//        chains.put("/name","anon");
+//        chains.put("/index","anon");
         chains.put("/**","authc");
         bean.setFilterChainDefinitionMap(chains);
         return bean;
@@ -50,7 +57,7 @@ public class shiroConfig {
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager securityManager(){
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-//        manager.setRealm();
+        manager.setRealm(getRealm());
         manager.setSessionManager(sessionManager());
         return manager;
     }
@@ -74,8 +81,35 @@ public class shiroConfig {
     }
 
     @Bean("myRealm")
+    @DependsOn(value = "lifecycleBeanPostProcessor")
     public myRealm getRealm(){
         myRealm realm = new myRealm();
+        realm.setCredentialsMatcher(credentialsMatcher());
         return realm;
+    }
+
+    @Bean
+    @DependsOn(value = "lifecycleBeanPostProcessor")
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean(name = "credentialsMatcher")
+    public CredentialsMatcher credentialsMatcher(){
+        return new RetryCredentialsMatcher();
+    }
+
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+        return new LifecycleBeanPostProcessor();
     }
 }

@@ -22,12 +22,13 @@ public class myRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String username = (String) authenticationToken.getPrincipal();
-        String password = (String) authenticationToken.getCredentials();
-        if (username != "liuzhi"){
-            throw new UnknownAccountException();
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        String username = token.getUsername();
+        String password = new String(token.getPassword());
+        if (!username.equals("liuzhi")){
+            throw new UnknownAccountException("username is null!");
         }
-        else if (username =="liuzhi" && password!="123"){
+        else if (username.equals("liuzhi") && !password.equals("123")){
             throw new IncorrectCredentialsException();
         }
         AuthenticationInfo info = new SimpleAuthenticationInfo(username,password,getName());

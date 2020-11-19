@@ -45,8 +45,9 @@ public class shiroConfig {
         bean.setFilters(map);
         Map<String,String> chains = new HashMap<String, String>();
         chains.put("/login","anon");
-        chains.put("/home","anon");
-        chains.put("/test","anon");
+        chains.put("/async","anon");
+//        chains.put("/home","anon");
+//        chains.put("/test","anon");
 //        chains.put("/name","anon");
 //        chains.put("/index","anon");
         chains.put("/**","authc");
